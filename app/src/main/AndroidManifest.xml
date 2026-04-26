@@ -1,44 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MissingClass">
-
-    <uses-sdk
-        android:minSdkVersion="26"
-        android:targetSdkVersion="35"
-        tools:overrideLibrary="androidx.core.splashscreen" />
+    package="org.levimc.launcher2">
 
     <uses-feature
-        android:glEsVersion="0x20000"
+        android:glEsVersion="0x00020000"
         android:required="true" />
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
 
+    <!-- Rede -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"
-        tools:ignore="ForegroundServicesPolicy" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+
+    <!-- Armazenamento -->
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-        tools:ignore="AllFilesAccessPolicy,ScopedStorage" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"
-        tools:ignore="RequestInstallPackagesPolicy" />
+        tools:ignore="ScopedStorage" />
+
+    <!-- Notificações & Feedback -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Instalação -->
     <uses-permission
-        android:name="android.permission.QUERY_ALL_PACKAGES"
-    tools:ignore="PackageVisibilityPolicy,QueryAllPackagesPermission" />
-  <uses-permission
-    android:name="android.permission.MANAGE_DOCUMENTS" />
+        android:name="android.permission.REQUEST_INSTALL_PACKAGES"
+        tools:ignore="RequestInstallPackagesPolicy" />
 
     <queries>
         <package android:name="com.mojang.minecraftpe" />
@@ -46,18 +36,22 @@
 
     <application
         android:name="org.levimc.launcher.core.minecraft.LauncherApplication"
+        android:allowBackup="false"
+        android:extractNativeLibs="true"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:requestLegacyExternalStorage="true"
-        android:theme="@style/Base.Theme.FullScreen"
+        android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/Base.Theme.FullScreen"
+        android:enableOnBackInvokedCallback="true">
 
         <activity
             android:name="org.levimc.launcher.ui.activities.SplashActivity"
-            android:exported="true"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
+            android:exported="true"
+            android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -67,131 +61,130 @@
 
         <activity
             android:name="org.levimc.launcher.ui.activities.MainActivity"
-            android:exported="true"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
+            android:exported="true"
+            android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.ContentManagementActivity"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
+            android:exported="false"
+            android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.ContentListActivity"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
+            android:exported="false"
+            android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.WorldEditorActivity"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
-            tools:ignore="DiscouragedApi"
-            android:label="@string/edit_world" />
+            android:exported="false"
+            android:label="@string/edit_world"
+            android:screenOrientation="landscape"
+            tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.OptionsEditorActivity"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
-            tools:ignore="DiscouragedApi"
-            android:label="@string/edit_options" />
+            android:exported="false"
+            android:label="@string/edit_options"
+            android:screenOrientation="landscape"
+            tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.CustomFlatWorldActivity"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
-            tools:ignore="DiscouragedApi"
-            android:label="@string/custom_flat_world" />
+            android:exported="false"
+            android:label="@string/custom_flat_world"
+            android:screenOrientation="landscape"
+            tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.SettingsActivity"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
-            tools:ignore="DiscouragedApi"
-            android:label="@string/settings_title" />
+            android:exported="false"
+            android:label="@string/settings_title"
+            android:screenOrientation="landscape"
+            tools:ignore="DiscouragedApi" />
 
-        <!-- Accounts Management -->
         <activity
             android:name="org.levimc.launcher.ui.activities.AccountsActivity"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
-            tools:ignore="DiscouragedApi"
-            android:label="@string/accounts_title" />
+            android:exported="false"
+            android:label="@string/accounts_title"
+            android:screenOrientation="landscape"
+            tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.MsftLoginActivity"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
+            android:exported="false"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="DiscouragedApi" />
 
         <activity
-            android:name=".ui.activities.ModsFullscreenActivity"
-            android:theme="@style/Base.Theme.FullScreen"
-            android:screenOrientation="sensorLandscape"
+            android:name="org.levimc.launcher.ui.activities.ModsFullscreenActivity"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
             android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Base.Theme.FullScreen"
             tools:ignore="DiscouragedApi" />
 
         <activity
-            android:name=".ui.activities.ModDetailActivity"
-            android:theme="@style/Base.Theme.FullScreen"
-            android:screenOrientation="sensorLandscape"
+            android:name="org.levimc.launcher.ui.activities.ModDetailActivity"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
             android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Base.Theme.FullScreen"
             tools:ignore="DiscouragedApi" />
 
         <activity
-            android:name=".ui.activities.InbuiltModsActivity"
-            android:theme="@style/Base.Theme.FullScreen"
-            android:screenOrientation="sensorLandscape"
+            android:name="org.levimc.launcher.ui.activities.InbuiltModsActivity"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
             android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Base.Theme.FullScreen"
             tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.CurseForgeActivity"
-            android:theme="@style/Base.Theme.FullScreen"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
             android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Base.Theme.FullScreen"
             tools:ignore="DiscouragedApi" />
 
         <activity
-            android:name=".ui.activities.ContentDetailsActivity"
-            android:theme="@style/Base.Theme.FullScreen"
-            android:screenOrientation="sensorLandscape"
+            android:name="org.levimc.launcher.ui.activities.ContentDetailsActivity"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
             android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Base.Theme.FullScreen"
             tools:ignore="DiscouragedApi" />
 
         <activity
-            android:name=".ui.activities.QuickLaunchActivity"
-            android:theme="@style/Base.Theme.FullScreen"
-            android:screenOrientation="sensorLandscape"
+            android:name="org.levimc.launcher.ui.activities.QuickLaunchActivity"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
             android:exported="false"
             android:label="@string/quick_launch_title"
+            android:screenOrientation="landscape"
+            android:theme="@style/Base.Theme.FullScreen"
             tools:ignore="DiscouragedApi" />
 
         <activity
-            android:name=".ui.activities.IntentHandler"
+            android:name="org.levimc.launcher.ui.activities.IntentHandler"
             android:alwaysRetainTaskState="true"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
             android:excludeFromRecents="false"
             android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi">
             <meta-data
                 android:name="android.app.lib_name"
@@ -208,58 +201,57 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="minecraft" />
             </intent-filter>
-            
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="*/*" />
                 <data android:host="*" />
                 <data android:scheme="file" />
                 <data android:scheme="content" />
-                <data android:pathPattern=".*\\.so" />
-                <data android:pathPattern=".*\\..*\\.so" />
-                <data android:pathPattern=".*\\..*\\..*\\.so" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.so" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.so" />
-                <data android:pathPattern=".*\\.mcworld" />
-                <data android:pathPattern=".*\\..*\\.mcworld" />
-                <data android:pathPattern=".*\\..*\\..*\\.mcworld" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.mcworld" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.mcworld" />
-                <data android:pathPattern=".*\\.mcpack" />
-                <data android:pathPattern=".*\\..*\\.mcpack" />
-                <data android:pathPattern=".*\\..*\\..*\\.mcpack" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.mcpack" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.mcpack" />
-                <data android:pathPattern=".*\\.mcaddon" />
-                <data android:pathPattern=".*\\..*\\.mcaddon" />
-                <data android:pathPattern=".*\\..*\\..*\\.mcaddon" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.mcaddon" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.mcaddon" />
-                <data android:pathPattern=".*\\.mctemplate" />
-                <data android:pathPattern=".*\\..*\\.mctemplate" />
-                <data android:pathPattern=".*\\..*\\..*\\.mctemplate" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.mctemplate" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.mctemplate" />
+                <data android:pathPattern=".*\.so" />
+                <data android:pathPattern=".*\..*\.so" />
+                <data android:pathPattern=".*\..*\..*\.so" />
+                <data android:pathPattern=".*\..*\..*\..*\.so" />
+                <data android:pathPattern=".*\..*\..*\..*\..*\.so" />
+                <data android:pathPattern=".*\.mcworld" />
+                <data android:pathPattern=".*\..*\.mcworld" />
+                <data android:pathPattern=".*\..*\..*\.mcworld" />
+                <data android:pathPattern=".*\..*\..*\..*\.mcworld" />
+                <data android:pathPattern=".*\..*\..*\..*\..*\.mcworld" />
+                <data android:pathPattern=".*\.mcpack" />
+                <data android:pathPattern=".*\..*\.mcpack" />
+                <data android:pathPattern=".*\..*\..*\.mcpack" />
+                <data android:pathPattern=".*\..*\..*\..*\.mcpack" />
+                <data android:pathPattern=".*\..*\..*\..*\..*\.mcpack" />
+                <data android:pathPattern=".*\.mcaddon" />
+                <data android:pathPattern=".*\..*\.mcaddon" />
+                <data android:pathPattern=".*\..*\..*\.mcaddon" />
+                <data android:pathPattern=".*\..*\..*\..*\.mcaddon" />
+                <data android:pathPattern=".*\..*\..*\..*\..*\.mcaddon" />
+                <data android:pathPattern=".*\.mctemplate" />
+                <data android:pathPattern=".*\..*\.mctemplate" />
+                <data android:pathPattern=".*\..*\..*\.mctemplate" />
+                <data android:pathPattern=".*\..*\..*\..*\.mctemplate" />
+                <data android:pathPattern=".*\..*\..*\..*\..*\.mctemplate" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="xbox_live_game_invite" />
                 <action android:name="xbox_live_achievement_unlock" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".core.minecraft.MinecraftActivity"
+            android:name="org.levimc.launcher.core.minecraft.MinecraftActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
             android:excludeFromRecents="false"
             android:exported="false"
-            android:launchMode="standard"
-            android:screenOrientation="sensorLandscape"
-            android:taskAffinity="org.levimc.launcher.minecraft"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:taskAffinity="org.levimc.launcher2.minecraft"
             android:theme="@style/AppFullScreenTheme"
             tools:ignore="DiscouragedApi">
             <meta-data
@@ -269,16 +261,16 @@
 
         <activity
             android:name="com.microsoft.xal.browser.IntentHandler"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="keyboardHidden|orientation|screenSize|uiMode"
             android:exported="true"
             android:launchMode="singleTask"
-            android:configChanges="keyboardHidden|orientation|screenSize|uiMode"
-            android:alwaysRetainTaskState="true"
             tools:replace="android:configChanges,android:exported">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <data
-                    android:scheme="ms-xal-0000000048183522"
-                    android:host="auth" />
+                    android:host="auth"
+                    android:scheme="ms-xal-0000000048183522" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
@@ -286,47 +278,48 @@
 
         <activity
             android:name="com.microsoft.xal.browser.BrowserLaunchActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="keyboardHidden|orientation|screenSize|uiMode"
             android:exported="false"
             android:launchMode="singleTask"
-            android:configChanges="keyboardHidden|orientation|screenSize|uiMode"
-            android:alwaysRetainTaskState="true"
             tools:replace="android:configChanges,android:exported" />
 
         <activity
             android:name="com.microsoft.xal.browser.WebKitWebViewController"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="keyboardHidden|orientation|screenSize|uiMode"
             android:exported="false"
             android:launchMode="singleTask"
-            android:configChanges="keyboardHidden|orientation|screenSize|uiMode"
-            android:alwaysRetainTaskState="true"
             tools:replace="android:configChanges,android:exported" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.CrashActivity"
+            android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
             android:exported="false"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@style/Base.Theme.FullScreen"
-            android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc" />
+            android:screenOrientation="landscape"
+            android:theme="@style/Base.Theme.FullScreen" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
+            android:authorities="org.levimc.launcher2.fileprovider"
             android:exported="false"
-            android:authorities="org.levimc.launcher.fileprovider"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
-    </provider>
-    <provider
-     android:name=".ui.activities.LeviDocumentsProvider"
-     android:authorities="org.levimc.launcher.documents"
-     android:exported="true"
-     android:grantUriPermissions="true"
-     android:permission="android.permission.MANAGE_DOCUMENTS">
-     <intent-filter>
-     <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
-     </intent-filter>
-     <grant-uri-permission android:pathPrefix="/" />
-    </provider>
+        </provider>
+
+        <provider
+            android:name="org.levimc.launcher.ui.activities.LeviDocumentsProvider"
+            android:authorities="org.levimc.launcher2.documents"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:permission="android.permission.MANAGE_DOCUMENTS">
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+            </intent-filter>
+            <grant-uri-permission android:pathPrefix="/" />
+        </provider>
 
     </application>
 
